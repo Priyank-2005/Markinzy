@@ -21,7 +21,7 @@ export default function LoginPage() {
             Login
           </button>
           <p className="text-sm text-center mt-4">
-            Don't have an account? <a href="/register" className="text-indigo-600 underline">Register</a>
+            Don&apos;t have an account? <a href="/register" className="text-indigo-600 underline">Register</a>
           </p>
         </form>
       </div>

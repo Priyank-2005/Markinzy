@@ -10,7 +10,6 @@ import HowItWorks from "@/components/HowItWorks";
 // import PricingStrip from "@/components/PricingStrip";
 import Testimonials from "@/components/Testimonials";
 import FAQ from "@/components/FAQ";
-import Contact from "@/components/Contact";
 import ChatBotWidget from '@/components/ChatBotWidget';
 import Footer from "@/components/Footer";
 

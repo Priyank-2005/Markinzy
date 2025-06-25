@@ -29,7 +29,7 @@ export default function Contact() {
         >
           <h2 className="text-4xl font-bold text-gray-800">Get in Touch</h2>
           <p className="text-gray-600 text-lg">
-            We'd love to hear from you! Reach out via the form or through our contact details below.
+            We&apos;d love to hear from you! Reach out via the form or through our contact details below.
           </p>
           <div className="text-gray-700 text-base space-y-2">
             <p><strong>Email:</strong> support@markinzy.com</p>

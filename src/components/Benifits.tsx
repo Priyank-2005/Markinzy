@@ -1,7 +1,5 @@
 'use client';
 
-import { Canvas, useFrame, useThree } from '@react-three/fiber';
-import { Sphere, Icosahedron, MeshDistortMaterial } from '@react-three/drei';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 

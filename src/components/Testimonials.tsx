@@ -2,6 +2,7 @@
 
 import { motion, useAnimation, useMotionValue } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
+import Image from 'next/image';
 
 const clients = [
   { name: 'TechNova Inc.', image: '/clients/technova.jpg' },
@@ -96,9 +97,11 @@ export default function Testimonials() {
               whileHover={{ scale: 1.08, y: -6, boxShadow: '0 8px 20px rgba(0,0,0,0.2)' }}
               className="min-w-[180px] h-[140px] rounded-2xl overflow-hidden shadow-md relative transition-all duration-300"
             >
-              <img
+              <Image
                 src={client.image}
                 alt={client.name}
+                width={200}
+                height={160}
                 className="w-full h-full object-cover"
               />
               <div className="absolute bottom-0 left-0 right-0 bg-black/60 text-white text-sm font-semibold text-center py-2">
