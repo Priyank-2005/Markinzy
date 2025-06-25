@@ -37,19 +37,17 @@ function RotatingIcosahedron({ zValue }: { zValue: MotionValue<number> }) {
 }
 
 function DistortedBlob({ distortion }: { distortion: MotionValue<number> }) {
-  const materialRef = useRef<THREE.ShaderMaterial>(null);
+  const materialRef = useRef<any>(null); // Fallback to 'any' for compatibility
 
   useFrame(() => {
     if (materialRef.current) {
-      // @ts-ignore-error – MeshDistortMaterial adds `distort` as a custom uniform
-      materialRef.current.distort = distortion.get();
+      materialRef.current['distort'] = distortion.get();
     }
   });
 
   return (
     <Sphere args={[1.2, 64, 64]} scale={2.2}>
       <MeshDistortMaterial
-        // @ts-ignore-error
         ref={materialRef}
         color="#8b5cf6"
         distort={distortion.get()}
@@ -59,6 +57,7 @@ function DistortedBlob({ distortion }: { distortion: MotionValue<number> }) {
     </Sphere>
   );
 }
+
 
 export default function Hero() {
   const mouseX = useMotionValue(0);
