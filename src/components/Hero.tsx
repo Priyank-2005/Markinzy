@@ -1,5 +1,4 @@
 'use client';
-import { MeshDistortMaterial as MeshDistortMaterialImpl } from '@react-three/drei';
 import { useRef, useEffect, useState } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import {
