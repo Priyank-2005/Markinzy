@@ -103,7 +103,7 @@ export default function Hero() {
       <motion.div
         style={{
           x: moveX,
-          y: useTransform([moveY, scrollOffset], ([my, sy]) => my + sy),
+          y: useTransform([moveY, scrollOffset], (input: number[]) => input[0] + input[1]),
         }}
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
