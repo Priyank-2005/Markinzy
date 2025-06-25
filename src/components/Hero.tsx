@@ -1,5 +1,5 @@
 'use client';
-
+import { MeshDistortMaterial as MeshDistortMaterialImpl } from '@react-three/drei';
 import { useRef, useEffect, useState } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import {
@@ -37,11 +37,10 @@ function RotatingIcosahedron({ zValue }: { zValue: MotionValue<number> }) {
 }
 
 function DistortedBlob({ distortion }: { distortion: MotionValue<number> }) {
-  const materialRef = useRef<any>(null); // Fallback to 'any' for compatibility
-
+  const materialRef = useRef(null);
   useFrame(() => {
     if (materialRef.current) {
-      materialRef.current['distort'] = distortion.get();
+      (materialRef.current as { distort?: number }).distort = distortion.get();
     }
   });
 
