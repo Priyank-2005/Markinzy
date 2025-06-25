@@ -10,6 +10,7 @@ import {
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import * as THREE from 'three';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -42,7 +43,7 @@ const steps = [
 ];
 
 function Shape({ color, isSphere = true }: { color: string; isSphere?: boolean }) {
-    const ref = useRef<any>(null);
+    const ref = useRef<THREE.Mesh>(null);
     useFrame(() => {
         if (ref.current) {
             ref.current.rotation.x += 0.005;
@@ -60,6 +61,7 @@ function Shape({ color, isSphere = true }: { color: string; isSphere?: boolean }
         </Icosahedron>
     );
 }
+
 
 function Step3D({ color, index }: { color: string; index: number }) {
     return (
@@ -93,7 +95,9 @@ export default function HowItWorks() {
                 transformOrigin: 'top',
             });
 
-            gsap.utils.toArray('.how-step').forEach((step: any, i: number) => {
+            // Inside useEffect — update the map loop
+            const stepsEls = gsap.utils.toArray<HTMLElement>('.how-step');
+            stepsEls.forEach((step, i) => {
                 gsap.fromTo(
                     step,
                     { autoAlpha: 0, y: i % 2 === 0 ? 60 : -60 },
@@ -109,6 +113,7 @@ export default function HowItWorks() {
                     }
                 );
             });
+
 
             gsap.fromTo(
                 fadeRef.current,

@@ -12,7 +12,6 @@ export default function PricingPage() {
   const [discountAnim, setDiscountAnim] = useState(null);
   const [billing, setBilling] = useState<"monthly" | "yearly">("monthly");
   const [isCompareOpen, setIsCompareOpen] = useState(false);
-  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     fetch("/animations/discount.json")

@@ -10,6 +10,7 @@ import {
 import { motion, useScroll, useTransform } from 'framer-motion';
 import Tilt from 'react-parallax-tilt';
 import { useEffect, useRef, useState } from 'react';
+import * as THREE from 'three';
 
 const features = [
   {
@@ -48,7 +49,7 @@ const features = [
 ];
 
 function ShapeMesh({ color }: { color: string }) {
-  const meshRef = useRef<any>(null);
+  const meshRef = useRef<THREE.Mesh>(null);
   const [isSphere, setIsSphere] = useState(true);
 
   useEffect(() => {
@@ -85,6 +86,7 @@ function ShapeMesh({ color }: { color: string }) {
     </Icosahedron>
   );
 }
+
 
 function AnimatedShape({ color }: { color: string }) {
   return (
