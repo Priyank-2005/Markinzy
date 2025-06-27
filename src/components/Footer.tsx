@@ -16,13 +16,13 @@ export default function Footer() {
             AI-powered marketing platform helping you create, optimize, and grow with ease.
           </p>
           <div className="flex space-x-6 text-gray-400 hover:text-indigo-400">
-            <a href="https://twitter.com/yourprofile" aria-label="Twitter" target="_blank" rel="noopener noreferrer">
+            <a href="https://x.com/i/flow/login?redirect_after_login=%2FAlphaloopIT" aria-label="Twitter" target="_blank" rel="noopener noreferrer">
               <FaTwitter size={24} />
             </a>
-            <a href="https://linkedin.com/in/yourprofile" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
+            <a href="https://www.linkedin.com/company/markinzy/" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
               <FaLinkedin size={24} />
             </a>
-            <a href="https://instagram.com/yourprofile" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
+            <a href="https://www.instagram.com/markinzy.ai/profilecard/?igsh=MXByM3o0YmtiOHJyMA%3D%3D" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
               <FaInstagram size={24} />
             </a>
           </div>

@@ -99,52 +99,50 @@ function AnimatedShape({ color }: { color: string }) {
   );
 }
 
-function FeatureCard({
-  title,
-  description,
-  color,
-  index,
-}: {
-  title: string;
-  description: string;
-  color: string;
-  index: number;
+function FeatureCard({ title, description, color, index }: {
+  title: string; description: string; color: string; index: number;
 }) {
   return (
     <Tilt
       tiltMaxAngleX={10}
       tiltMaxAngleY={10}
       glareEnable={false}
-      scale={1} // Prevents zoom on hover
+      scale={1}
       transitionSpeed={1000}
-      gyroscope={false} // Disable mobile gyroscope zoom
-      trackOnWindow={false} // Only track cursor inside the card
-      tiltReverse={true} // Optional: smooth reverse tilt
-      style={{ transform: 'none !important' }} // Hard override (CSS fallback)
+      gyroscope={false}
+      trackOnWindow={false}
+      tiltReverse
       className="w-full"
     >
-
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: index * 0.1 }}
         viewport={{ once: true }}
-        className="bg-white border border-gray-200 rounded-xl p-5 shadow-lg hover:shadow-2xl transition duration-300 w-[400px] h-[340px] flex flex-col justify-between"
+        /* ---------- responsive card ---------- */
+        className="bg-white border border-gray-200 rounded-xl p-5 shadow-lg
+                   hover:shadow-2xl transition duration-300
+                   w-full max-w-[400px] mx-auto            /* ⬅ mobile 100%, cap at 400px */
+                   min-h-[320px] flex flex-col justify-between"
       >
+        {/* Canvas + halo */}
         <div className="flex justify-center mb-3 relative">
           <div
             className="absolute w-20 h-20 rounded-full blur-2xl opacity-30 -z-10"
             style={{ background: color }}
-          ></div>
+          />
           <AnimatedShape color={color} />
         </div>
+
         <h3 className="text-lg font-semibold mb-1 text-gray-900">{title}</h3>
         <p className="text-gray-600 text-sm leading-relaxed flex-grow">
           {description}
         </p>
+
         <a
           href="/pricing"
-          className="mt-4 text-white bg-indigo-600 px-4 py-2 rounded-full shadow hover:bg-indigo-700 transition text-sm self-center"
+          className="mt-4 text-white bg-indigo-600 px-4 py-2 rounded-full shadow
+                     hover:bg-indigo-700 transition text-sm self-center"
         >
           Start Free Trial
         </a>
@@ -152,6 +150,7 @@ function FeatureCard({
     </Tilt>
   );
 }
+
 
 export default function Features() {
   const ref = useRef(null);

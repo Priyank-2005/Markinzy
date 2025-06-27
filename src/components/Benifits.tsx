@@ -85,14 +85,17 @@ export default function Benefits() {
         style={{ transformOrigin: 'left' }}
       />
 
+      {/* Responsive Cards */}
       <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10">
         {benefits.map((b, i) => {
-          const translateY = i === 0 ? translateY1 : i === 1 ? translateY2 : translateY3;
+          const translateY =
+            i % 3 === 0 ? translateY1 : i % 3 === 1 ? translateY2 : translateY3;
+
           return (
             <motion.div
               key={i}
               style={{ y: translateY, filter: blur }}
-              className="relative bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition duration-300 cursor-default overflow-hidden"
+              className="relative bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition duration-300 cursor-default overflow-hidden w-full max-w-[400px] mx-auto"
             >
               <h3 className="relative text-xl font-bold mb-4 text-gray-900">
                 {b.title}

@@ -23,8 +23,8 @@ export default function Home() {
       <HowItWorks />
       {/*<Demo />            4  Live mini-demo or video
       <PricingStrip />    5  Slim CTA linking to /pricing */}
-      <Testimonials />    6  Carousel
-      <FAQ />             7  Accordions */
+      <Testimonials />
+      <FAQ />
       <Footer />
       <ChatBotWidget />
     </main>
