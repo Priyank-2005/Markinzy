@@ -7,7 +7,6 @@ import {
   Icosahedron,
   Sphere,
   MeshDistortMaterial,
-  MeshDistortMaterial as MeshDistortMaterialImpl,
   Stars,
   TorusKnot,
 } from '@react-three/drei';
