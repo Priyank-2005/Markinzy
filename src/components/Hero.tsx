@@ -7,6 +7,7 @@ import {
   Icosahedron,
   Sphere,
   MeshDistortMaterial,
+  MeshDistortMaterial as MeshDistortMaterialImpl,
   Stars,
   TorusKnot,
 } from '@react-three/drei';
@@ -47,19 +48,13 @@ function RotatingIcosahedron({
 }) {
   const ref = useRef<THREE.Mesh>(null!);
   useFrame(() => {
-    if (ref.current) {
-      ref.current.rotation.x += 0.003;
-      ref.current.rotation.y += 0.004;
-      ref.current.position.z = zValue.get();
-    }
+    ref.current.rotation.x += 0.003;
+    ref.current.rotation.y += 0.004;
+    ref.current.position.z = zValue.get();
   });
   return (
     <Icosahedron ref={ref} args={[1.5 * scale, 0]}>
-      <meshStandardMaterial
-        color="#8b5cf6"
-        roughness={0.3}
-        metalness={0.8}
-      />
+      <meshStandardMaterial color="#8b5cf6" roughness={0.3} metalness={0.8} />
     </Icosahedron>
   );
 }
@@ -71,12 +66,14 @@ function DistortedBlob({
   distortion: MotionValue<number>;
   scale: number;
 }) {
-  const mat = useRef<any>(null);
+  const mat = useRef<React.ElementRef<typeof MeshDistortMaterial>>(null);
+
   useFrame(() => {
     if (mat.current) mat.current.distort = distortion.get();
   });
+
   return (
-    <Sphere args={[1.2, 64, 64]}>
+    <Sphere args={[1.2 * scale, 64, 64]}>
       <MeshDistortMaterial
         ref={mat}
         color="#8b5cf6"
@@ -103,9 +100,11 @@ export default function Hero() {
   const distortion = useTransform(scrollY, [0, 300], [0.2, 1.2]);
   const depthZ = useTransform(scrollY, [0, 500], [0, -10]);
 
-  // Always define hooks before conditionals/JSX
   const staticY = useTransform(scrollOffset, [0, 1], [0, 0]);
-  const combinedY = useTransform([moveY, scrollOffset], (v: number[]) => v[0] + v[1]);
+  const combinedY = useTransform(
+    [moveY, scrollOffset],
+    (latest: number[]) => latest[0] + latest[1]
+  );
 
   const finalX = isMobile ? 0 : moveX;
   const finalY = isMobile ? staticY : combinedY;
@@ -116,8 +115,6 @@ export default function Hero() {
     mouseY.set(e.clientY);
   };
 
-  const heading = 'AI-Powered Marketing';
-
   return (
     <section
       id="hero"
@@ -125,11 +122,8 @@ export default function Hero() {
       className="relative flex flex-col items-center justify-center text-center w-full px-6 mx-auto"
       style={{ minHeight: 'calc(100vh - 300px)' }}
     >
-      {/* 3D Background */}
-      <Canvas
-        className="absolute inset-0 -z-10"
-        camera={{ position: [0, 0, 6], fov: 50 }}
-      >
+      {/* 3-D Background */}
+      <Canvas className="absolute inset-0 -z-10" camera={{ position: [0, 0, 6], fov: 50 }}>
         <ambientLight intensity={0.5} />
         <directionalLight position={[2, 3, 2]} />
         <Stars radius={100} depth={50} count={5000} factor={4} fade />
@@ -149,7 +143,7 @@ export default function Hero() {
         <OrbitControls enableZoom={false} enableRotate={!isMobile} />
       </Canvas>
 
-      {/* Text Content */}
+      {/* Text */}
       <motion.div
         style={{ x: finalX, y: finalY }}
         initial={{ opacity: 0, y: 30 }}
@@ -158,36 +152,23 @@ export default function Hero() {
         className="max-w-3xl z-10"
       >
         <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4 text-gray-900 leading-tight">
-          {/* Mobile: break into two lines */}
+          {/* Mobile: two lines */}
           <span className="block md:hidden">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-            >
+            <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
               AI Powered
             </motion.div>
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-            >
-              Marketing{" "}
-              <span className="bg-gradient-to-r from-indigo-500 to-purple-600 bg-clip-text text-transparent">
-                Redefined
-              </span>
+            <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }}>
+              Marketing{' '}
+              <span className="bg-gradient-to-r from-indigo-500 to-purple-600 bg-clip-text text-transparent">Redefined</span>
             </motion.div>
           </span>
 
           {/* Desktop: single line */}
           <span className="hidden md:inline-block">
-            {`AI Powered Marketing `}
-            <span className="bg-gradient-to-r from-indigo-500 to-purple-600 bg-clip-text text-transparent">
-              Redefined
-            </span>
+            AI Powered Marketing{' '}
+            <span className="bg-gradient-to-r from-indigo-500 to-purple-600 bg-clip-text text-transparent">Redefined</span>
           </span>
         </h1>
-
 
         <motion.p
           initial={{ opacity: 0, y: 20 }}
