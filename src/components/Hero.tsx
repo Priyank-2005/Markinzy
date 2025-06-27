@@ -76,13 +76,13 @@ function DistortedBlob({
     if (mat.current) mat.current.distort = distortion.get();
   });
   return (
-    <Sphere args={[1.2 * scale, 64, 64]}>
+    <Sphere args={[1.2, 64, 64]}>
       <MeshDistortMaterial
         ref={mat}
         color="#8b5cf6"
         roughness={0.2}
         speed={2.5}
-        distort={distortion.get()}
+        distort={0.4}
       />
     </Sphere>
   );
@@ -105,7 +105,7 @@ export default function Hero() {
 
   // Always define hooks before conditionals/JSX
   const staticY = useTransform(scrollOffset, [0, 1], [0, 0]);
-const combinedY = useTransform([moveY, scrollOffset], (v: number[]) => v[0] + v[1]);
+  const combinedY = useTransform([moveY, scrollOffset], (v: number[]) => v[0] + v[1]);
 
   const finalX = isMobile ? 0 : moveX;
   const finalY = isMobile ? staticY : combinedY;
@@ -158,35 +158,35 @@ const combinedY = useTransform([moveY, scrollOffset], (v: number[]) => v[0] + v[
         className="max-w-3xl z-10"
       >
         <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4 text-gray-900 leading-tight">
-  {/* Mobile: break into two lines */}
-  <span className="block md:hidden">
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6 }}
-    >
-      AI Powered
-    </motion.div>
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, delay: 0.2 }}
-    >
-      Marketing{" "}
-      <span className="bg-gradient-to-r from-indigo-500 to-purple-600 bg-clip-text text-transparent">
-        Redefined
-      </span>
-    </motion.div>
-  </span>
+          {/* Mobile: break into two lines */}
+          <span className="block md:hidden">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+            >
+              AI Powered
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
+              Marketing{" "}
+              <span className="bg-gradient-to-r from-indigo-500 to-purple-600 bg-clip-text text-transparent">
+                Redefined
+              </span>
+            </motion.div>
+          </span>
 
-  {/* Desktop: single line */}
-  <span className="hidden md:inline-block">
-    {`AI Powered Marketing `}
-    <span className="bg-gradient-to-r from-indigo-500 to-purple-600 bg-clip-text text-transparent">
-      Redefined
-    </span>
-  </span>
-</h1>
+          {/* Desktop: single line */}
+          <span className="hidden md:inline-block">
+            {`AI Powered Marketing `}
+            <span className="bg-gradient-to-r from-indigo-500 to-purple-600 bg-clip-text text-transparent">
+              Redefined
+            </span>
+          </span>
+        </h1>
 
 
         <motion.p
